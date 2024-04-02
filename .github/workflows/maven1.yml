@@ -29,5 +29,13 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - uses: mr-smithers-excellent/docker-build-push@v6
+      name: Build & push Docker image
+      with:
+        image: 9870128971/gfgb8new:tagname
+        tags: v1, latest
+        registry: registry-url.io
+        dockerfile: Dockerfile.ci
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
-   
